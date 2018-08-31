@@ -7,6 +7,7 @@ Simple Google Dorker Tools 2018
 - Install all dependencies
   ``` npm install```
 - running
-  ``` usage: node google.js "google_dork"
+  ``` 
+      usage: node google.js "google_dork"
       example: node google.js "inurl:/admin/login"
       example: node google.js "intext:'Powered by SomeVendor.com'"```
