@@ -6,3 +6,7 @@ Simple Google Dorker Tools 2018
   ```git clone https://github.com/agussetyar/google-dorker-puppeteer.git```
 - Install all dependencies
   ``` npm install```
+- running
+  ``` usage: node google.js "google_dork"
+      example: node google.js "inurl:/admin/login"
+      example: node google.js "intext:'Powered by SomeVendor.com'"```
