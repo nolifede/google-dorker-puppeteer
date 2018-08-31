@@ -2,9 +2,10 @@
 // Coded by L0c4lh34rtz - IndoXploit
 // https://www.github.com/agussetyar  - https://www.indoxploit.or.id
 
-const process   = require('process');
-const path      = require('path');
-const puppeteer = require('puppeteer');
+const process       = require('process');
+const path          = require('path');
+const puppeteer     = require('puppeteer');
+const randomstring  = require("randomstring");
 
 (async () => {
     if(process.argv.length < 3) {
@@ -29,6 +30,7 @@ const puppeteer = require('puppeteer');
         console.log('Searching for: '+keyword);
 
         while(start < max) { 
+            await page.setUserAgent('indoXploit/'+randomstring.generate());
             await page.goto('https://www.google.com/search?hl=en&q='+keyword+'&start='+start, {waitUntil: 'networkidle2'});
             await page.screenshot({path: 'example.png'});
         
