@@ -16,18 +16,25 @@ const puppeteer = require('puppeteer');
         let start   = 0;
         let max     = 100;
 
-        const browser   = await puppeteer.launch({headless: true});
+        const browser   = await puppeteer.launch({
+            headless: true, 
+            args: ['--no-sandbox', '--media-cache-size=0', '--disk-cache-size=0']
+        });
         const page      = await browser.newPage();
+        const client    = await page.target().createCDPSession();
+
         await page.setCacheEnabled(false);
+        await client.send('Network.setCacheDisabled', {'cacheDisabled' : true});
         
         console.log('Searching for: '+keyword);
 
         while(start < max) { 
             await page.goto('https://www.google.com/search?hl=en&q='+keyword+'&start='+start, {waitUntil: 'networkidle2'});
+            await page.screenshot({path: 'example.png'});
         
             const search_result = await page.evaluate(() => document.querySelector('#resultStats').innerText);
             const search_url    = await page.$$eval('.rc > .r > a', href => href.map((a) => { return a.href }));
-        
+            
             console.log(search_result);
             console.log(search_url);
 
